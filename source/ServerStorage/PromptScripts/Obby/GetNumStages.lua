@@ -1,0 +1,1 @@
+print(#workspace.Map.Obby:GetChildren())

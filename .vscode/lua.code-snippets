@@ -1,0 +1,1495 @@
+
+{
+	// Place your snippets for lua here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+    // }
+    "EzRefBinder": {
+        "prefix": "REzRefBinder",
+        "body": [
+            "self.$1 = SharedSherlock:find({\"EzRef\", \"GetSync\"}, {inst=self.$2, refName=\"$1\"})",
+            "if not self.$1 then return end",
+		],
+    },
+    "RNotificationStream": {
+        "prefix": "RNotificationStream",
+        "body": [
+            "local BEvents = ComposedKey.getAsync(ReplicatedStorage, {\"Bindables\", \"Events\"})",
+            "local NotificationStreamSE = SharedSherlock:find({\"Bindable\", \"async\"}, {root=BEvents, signal=\"NotificationStream\"})",
+            "local NotificationStreamRE = ComposedKey.getAsync(ReplicatedStorage, {\"Remotes\", \"Events\", \"NotificationStream\"})",
+            "NotificationStream:FireClient(player, {",
+            "    Text = (\"\"),",
+            "})",
+		],
+    },
+    "RForWithFilter": {
+        "prefix": "RForWithFilter",
+        "body": [
+            "for _, desc in ipairs(:GetDescendants()) do",
+            "    if not desc:IsA(\"BasePart\") then continue end",
+            "    ",
+            "end",
+		],
+    },
+    "GuiProto": {
+        "prefix": "RGuiProto",
+        "body": [
+            "local $1 = SharedSherlock:find({\"EzRef\", \"Get\"}, {inst=gui, refName=\"$1\"})",
+            "local Container = $1.Parent",
+            "$1.Parent = nil",
+		],
+    },
+    "GuiProtoClone": {
+        "prefix": "RGuiProtoClone",
+        "body": [
+            "local _gui = $1:Clone()",
+            "_gui.Name = \"\"",
+            "_gui.Visible = true",
+            "_gui.Parent = Container",
+		],
+    },
+    "DelayPromise": {
+        "prefix": "RDelayPromise",
+        "body": [
+            "Promise.delay():andThen(function()",
+            "    ",
+            "end)",
+		],
+    },
+    "SameFrameValidation": {
+        "prefix": "RSameFrameValidation",
+        "body": [
+            "local frame1 = BigBen.tickType.frame",
+            "assert(BigBen.tickType.frame == frame1)",
+		],
+    },
+
+    "IdToName": {
+        "prefix": "RIdToName",
+        "body": [
+            "module.idData = {}",
+            "",
+            "module.nameData = {}",
+            "",
+            "for id, data in pairs(module.idData) do",
+            "    data.id = id",
+            "    module.nameData[data.name] = data",
+            "end",
+
+		],
+    },
+    "MaidInBinderMethod": {
+        "prefix": "RMaidInBinderMethod",
+        "body": [
+            "local maid = self._maid:Add2(Maid.new(), \"\")",
+            "",
+            "return maid"
+		],
+    },
+    "Maid": {
+        "prefix": "RMaid",
+        "body": [
+            "local maid = Maid.new()",
+            "",
+            "return maid"
+		],
+    },
+    "SetAttributes": {
+        "prefix": "RSetAttributes",
+        "body": [
+            "local function setAttributes()",
+            "    script:SetAttribute(\"$1\", $2)",
+            "end",
+            "setAttributes()",
+		],
+    },
+    "ComponentMetatable": {
+        "prefix": "RComponentMetatable",
+        "body": [
+            "setmetatable(self, {__index = function(tbl, idx)",
+            "    if CameraRun[idx] then return CameraRun[idx] end",
+            "    if charCamera[idx] then return charCamera[idx] end",
+            "end})",
+		],
+    },
+    "GetPlayerState": {
+        "prefix": "RGetPlayerState",
+        "body": [
+            "local player$1State = playerState:get(S.$2, \"$1\")",
+		],
+    },
+    "CFrameUtils": {
+        "prefix": "RCFrameUtils",
+        "body": [
+            "local CFrameUtils = Mod:find({\"Mosby\", \"CFrameUtils\"})",
+		],
+    },
+    "BindersLoad": {
+        "prefix": "RBindersLoad",
+        "body": [
+            "self.player = PlayerUtils:GetPlayerFromCharacter(self.char)",
+            "if not self.player then return end",
+            "local BinderUtils = Mod:find({\"Binder\", \"Utils\"})",
+            "local bindersData = {",
+            "    {\"PlayerState\", self.player},",
+            "    {\"CharState\", self.char},",
+            "    {\"CharParts\", self.char},",
+            "    {\"CharProps\", self.char},",
+            "}",
+            "if not BinderUtils.addBindersToTable(self, bindersData) then return end",
+		],
+    },
+    "BinderRemoteLoad": {
+        "prefix": "RBinderRemoteLoad",
+        "body": [
+            "local remotes = {",
+            "    ",
+            "}",
+            "local root",
+            "if not BinderUtils.addRemotesToTable(self, root, remotes) then return end",
+		],
+    },
+    "RGetInstObj": {
+        "prefix": "RGetInstObj",
+        "body": [
+            "local $1 = SharedSherlock:find({\"Binders\", \"getInstObj\"}, {tag = \"$1\", inst = $2})",
+		],
+    },
+    "getObjPromise": {
+        "prefix": "RgetObjPromise",
+        "body": [
+            "SharedSherlock:find({\"Binders\", \"getObjPromise\"}, {inst=$1, tag=$2})",
+            ":andThen(function()",
+            "    $3",
+            "end)",
+            ":catch(function(err)",
+            "    warn(tostring(err))",
+            "end)",
+		],
+    },
+    "BinderUtils": {
+        "prefix": "RBinderUtils",
+        "body": [
+            "local BinderUtils = Mod:find({\"Binder\", \"Utils\"})",
+		],
+    },
+    "ParticleEmitter3D": {
+        "prefix": "RParticleEmitter3D",
+        "body": [
+            "local ParticleEmitter3D = Mod:find({\"MBay\", \"ParticleEmitter3D\"})",
+		],
+    },
+    "PlayerUtils": {
+        "prefix": "RPlayerUtils",
+        "body": [
+            "local PlayerUtils = Mod:find({\"PlayerUtils\", \"PlayerUtils\"})",
+		],
+    },
+    "CharUtils": {
+        "prefix": "RCharUtils",
+        "body": [
+            "local CharUtils = Mod:find({\"CharUtils\", \"CharUtils\"})",
+		],
+    },
+    "IdUtils": {
+        "prefix": "RIdUtils",
+        "body": [
+            "local IdUtils = Mod:find({\"Id\", \"Utils\"})",
+		],
+    },
+    "NewtonUtils": {
+        "prefix": "RNewtonUtils",
+        "body": [
+            "local NewtonUtils = Mod:find({\"Newton\", \"Utils\"})",
+		],
+    },
+    "VfxFactory": {
+        "prefix": "RVfxFactory",
+        "body": [
+            "local VfxFactory = Mod:find({\"MBay\", \"VfxFactory\"})",
+		],
+    },
+    "SingletonsManager": {
+        "prefix": "RSingletonsManager",
+        "body": [
+            "local SingletonsManager = Mod:find({\"Singleton\", \"Manager\"})",
+		],
+    },
+    "Athena": {
+        "prefix": "RAthena",
+        "body": [
+            "local Athena = Mod:find({\"Athena\", \"Athena\"})",
+		],
+    },
+    "PlayerStateUpdate": {
+        "prefix": "RPlayerStateUpdate",
+        "body": [
+            "local function update(state)",
+            "$4",
+            "end",
+            "self._maid:Add(playerState:getEvent(S.$1, $2, $3):Connect(update))",
+            "local state = playerState:get(S.$1, $2)",
+            "update(state)",
+		],
+    },
+    "CharStateUpdate": {
+        "prefix": "RCharStateUpdate",
+        "body": [
+            "local function update(state)",
+            "$4",
+            "end",
+            "self._maid:Add(charState:getEvent(S.$1, $2, $3):Connect(update))",
+            "local state = charState:get(S.$1, $2)",
+            "update(state)",
+		],
+    },
+    "CreateClassRemotes": {
+        "prefix": "RCreateClassRemotes",
+        "body": [
+            "local GaiaServer = Mod:find({\"Gaia\", \"Server\"})",
+            "local function createRemotes()",
+            "    local eventsNames = {$2}",
+            "    local functionsNames = {$2}",
+            "    GaiaServer.createRemotes(ReplicatedStorage, {",
+            "        events = eventsNames,",
+            "        functions = functionsNames,",
+            "    })",
+            "    for _, eventName in ipairs(eventsNames) do",
+            "        self[(\"%sRE\"):format(eventName)] = ReplicatedStorage.Remotes.Events[eventName]",
+            "    end",
+            "    for _, funcName in ipairs(functionsNames) do",
+            "        self[(\"%sRF\"):format(funcName)] = ReplicatedStorage.Remotes.Functions[funcName]",
+            "    end",
+            "end",
+            "createRemotes()",
+		],
+    },
+    "CreateRemotes": {
+        "prefix": "RCreateRemotes",
+        "body": [
+            "local GaiaServer = Mod:find({\"Gaia\", \"Server\"})",
+            "self:createRemotes()",
+            "function :createRemotes()",
+            "    local eventsNames = {$2}",
+            "    local functionsNames = {$2}",
+            "    GaiaServer.createRemotes($1, {",
+            "        events = eventsNames,",
+            "        functions = functionsNames,",
+            "    })",
+            "    for _, eventName in ipairs(eventsNames) do",
+            "        self[(\"%sRE\"):format(eventName)] = $1.Remotes.Events[eventName]",
+            "    end",
+            "    for _, funcName in ipairs(functionsNames) do",
+            "        self[(\"%sRF\"):format(funcName)] = $1.Remotes.Functions[funcName]",
+            "    end",
+            "end",
+		],
+    },
+    "CreateRemotesBinder": {
+        "prefix": "RCreateRemotesBinder",
+        "body": [
+            "local GaiaServer = Mod:find({\"Gaia\", \"Server\"})",
+            "self:createRemotes()",
+            "function :createRemotes()",
+            "    self._maid:Add(GaiaServer.createBinderRemotes(self, self., {",
+            "        events = {},",
+            "        functions = {},",
+            "    }))",
+            "end",
+		],
+    },
+    "CharEvents": {
+        "prefix": "RCharEvents",
+        "body": [
+            "local charId = self.char:GetAttribute(\"uid\")",
+            "self.charEvents = ComposedKey.getFirstDescendant(ReplicatedStorage, {\"CharsEvents\", charId})",
+            "if not self.charEvents then return end"
+		],
+    },
+    "GetRemoteEventSync": {
+        "prefix": "RGetRemoteEventSync",
+        "body": [
+            "local $1 = ComposedKey.getEvent($2, \"$3\")",
+            "if not $1 then return end",
+            "$1:FireServer()"
+		],
+    },
+    "RGetSignalSync": {
+        "prefix": "RGetSignalSync",
+        "body": [
+            "local $1 = SharedSherlock:find({\"Bindable\", \"sync\"}, {root = $2, signal = \"$3\"})",
+            "if not $1 then return end",
+            "$1:Fire()"
+		],
+    },
+    "CreateSignals": {
+        "prefix": "RCreateSignals",
+        "body": [
+            "local GaiaShared = Mod:find({\"Gaia\", \"Shared\"})",
+            "self:createSignals()",
+            "function :createSignals()",
+            "    local eventsNames = {$2}",
+            "    GaiaShared.createBindables($1, {",
+            "        events = eventsNames,",
+            "    })",
+            "    for _, eventName in ipairs(eventsNames) do",
+            "        local event = $1.Bindables.Events[eventName]",
+            "        self[(\"%sSE\"):format(event.Name)] = SharedSherlock:find({\"Bindable\", \"async\"}, {root=event.Parent, signal=event.Name})",
+            "    end",
+            "end",
+		],
+    },
+    "CreateSignalsBinder": {
+        "prefix": "RCreateSignalsBinder",
+        "body": [
+            "local GaiaShared = Mod:find({\"Gaia\", \"Shared\"})",
+            "self:createSignals()",
+            "function :createSignals()",
+            "    return self._maid:Add(GaiaShared.createBinderSignals(self, self., {",
+            "        events = {},",
+            "    }))",
+            "end"
+		],
+    },
+    "CausalityUtils": {
+        "prefix": "RCausalityUtils",
+        "body": [
+            "local CausalityUtils = Mod:find({\"Causality\", \"Shared\", \"Utils\"})",
+		],
+    },
+    "StringsUtils": {
+        "prefix": "RStringsUtils",
+        "body": [
+            "local StringsUtils = Mod:find({\"Strings\", \"Utils\"})",
+		],
+    },
+    "Function": {
+        "prefix": "RFunction",
+        "body": [
+            "local function $1($2)",
+            "    ",
+            "end",
+		],
+    },
+    "Functional": {
+        "prefix": "RFunctional",
+        "body": [
+            "local Functional = Mod:find({\"Functional\"})",
+		],
+    },
+    "Collisions": {
+        "prefix": "RCollisions",
+        "body": [
+            "local Collisions = Mod:find({\"Collisions\"})",
+		],
+    },
+    "Iterators": {
+        "prefix": "RIterators",
+        "body": [
+            "local Iterators = Mod:find({\"Iterators\"})",
+		],
+    },
+    "BinderClass": {
+        "prefix": "RBinderClass",
+        "body": [
+            "local Parent = script.Parent",
+            "local Class = require(Parent:WaitForChild(Parent.Name))",
+            "",
+            "return Class",
+		],
+    },
+    "Faders": {
+        "prefix": "RFaders",
+        "body": [
+            "local Faders = Mod:find({\"Ux\", \"Faders\"})",
+		],
+    },
+    "CircularArray": {
+        "prefix": "RCircularArray",
+        "body": [
+            "local CircularArray = Mod:find({\"DataStructures\", \"Array\", \"Circular\"})",
+		],
+    },
+    "JobScheduler": {
+        "prefix": "RJobScheduler",
+        "body": [
+            "local JobScheduler = Mod:find({\"DataStructures\", \"JobScheduler\"})",
+		],
+    },
+    "PriorityQueue": {
+        "prefix": "RPriorityQueue",
+        "body": [
+            "local PriorityQueue = Mod:find({\"DataStructures\", \"PriorityQueue\"})",
+		],
+    },
+    "Set": {
+        "prefix": "RSet",
+        "body": [
+            "local Set = Mod:find({\"DataStructures\", \"Set\"})",
+		],
+    },
+    "Stack": {
+        "prefix": "RStack",
+        "body": [
+            "local Stack = Mod:find({\"DataStructures\", \"Stack\"})",
+		],
+    },
+    "Queue": {
+        "prefix": "RQueue",
+        "body": [
+            "local Queue = Mod:find({\"DataStructures\", \"Queue\"})",
+		],
+    },
+    "NumberFormatter": {
+        "prefix": "RNumberFormatter",
+        "body": [
+            "local NumberFormatter = Mod:find({\"Formatters\", \"NumberFormatter\"})",
+		],
+    },
+    "TimeFormatter": {
+        "prefix": "RTimeFormatter",
+        "body": [
+            "local TimeFormatter = Mod:find({\"Formatters\", \"TimeFormatter\"})",
+		],
+    },
+    "TableUtils": {
+        "prefix": "RTableUtils",
+        "body": [
+            "local TableUtils = Mod:find({\"Table\", \"Utils\"})",
+		],
+    },
+    "WaitFor": {
+        "prefix": "RWaitFor",
+        "body": [
+            "local WaitFor = Mod:find({\"WaitFor\", \"WaitFor\"})",
+		],
+    },
+    "InstanceUtils": {
+        "prefix": "RInstanceUtils",
+        "body": [
+            "local InstanceUtils = Mod:find({\"InstanceUtils\", \"Utils\"})",
+		],
+    },
+    "InstanceProps": {
+        "prefix": "RInstanceProps",
+        "body": [
+            "local InstanceProps = Mod:find({\"InstanceUtils\", \"Props\"})",
+		],
+    },
+    "GetBinder": {
+        "prefix": "RGetBinder",
+        "body": [
+            "local binder$1 = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"$2\"})",
+		],
+    },
+    "Mts": {
+        "prefix": "RMts",
+        "body": [
+            "local Mts = Mod:find({\"Table\", \"Mts\"})",
+		],
+    },
+    "ComposedKey": {
+        "prefix": "RComposedKey",
+        "body": [
+            "local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)",
+		],
+    },
+    "InitComponentsV2": {
+        "prefix": "RInitComponentsV2",
+        "body": [
+            "if not self:initComponents() then return end",
+            "function $1:initComponents()",
+            "    for cName, cClass in pairs(Components) do",
+            "        self[cName] = self._maid:AddComponent(cClass.new(self))",
+            "        if not self[cName] then return end",
+            "    end",
+            "    return true",
+            "end",
+		],
+    },
+    "InitComponents": {
+        "prefix": "RInitComponents",
+        "body": [
+            "local RootF = script:FindFirstAncestor(\"\")",
+            "local Components = {",
+            "     = require(ComposedKey.getAsync(RootF, {\"Components\", \"\"})),",
+            "}",
+            "if not BinderUtils.initComponents(self, Components) then return end",
+		],
+    },
+    "Mod": {
+        "prefix": "RMod",
+        "body": [
+            "local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)",
+            "local Mod = require(ComposedKey.getAsync(ReplicatedStorage, {\"Sherlocks\", \"Shared\", \"Mod\"}))",
+		],
+    },
+    "SomeMod": {
+        "prefix": "RSomeMod",
+        "body": [
+            "local $1 = Mod:find({\"$1\"})",
+		],
+    },
+    "OrganizeTemplate": {
+        "prefix": "ROrganizeTemplate",
+        "body": [
+			"local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+            "local sysName = \"$1\"",
+            "local RootF = script:FindFirstAncestor(sysName)",
+            "",
+            "local RS = RootF.RS",
+            "RS.Parent = ReplicatedStorage",
+            "RS.Name = sysName",
+            "",
+            "local ClientLoader = RootF.DaMatrix.ClientLoader",
+            "ClientLoader.Name = \"Loader\"",
+            "ClientLoader.Parent = RS.Client",
+            "",
+            "local module = {}",
+            "",
+            "return module",
+		],
+    },
+    "WaitForVal": {
+        "prefix": "RWaitForVal",
+        "body": [
+			"local $1 = SharedSherlock:find({\"WaitFor\", \"Val\"}, {",
+            "    getter=function()",
+            "    end,",
+            "    keepTrying=function()",
+            "    end,",
+            "})",
+		],
+    },
+    "WaitForValPromise": {
+        "prefix": "RWaitForValPromise",
+        "body": [
+			"SharedSherlock:find({\"WaitFor\", \"ValPromise\"}, {",
+            "    getter=function()",
+            "        ",
+            "    end,",
+            "    keepTrying=function()",
+            "        ",
+            "    end,",
+            "})",
+		],
+    },
+    "WaitForChildInstance": {
+        "prefix": "RWaitForChildInstance",
+        "body": [
+			"local $1 = SharedSherlock:find({\"WaitFor\", \"ChildInstance\"}, {parent=$2, childName=$3})",
+		],
+    },
+    "WaitForDescendantInstance": {
+        "prefix": "RWaitForDescendantInstance",
+        "body": [
+			"local $1 = SharedSherlock:find({\"WaitFor\", \"DescendantInstance\"}, {parent=$2, descName=$3})",
+		],
+    },
+    "TweenInfo": {
+        "prefix": "RTweenInfo",
+        "body": [
+            "local tweenInfo = TweenInfo.new(",
+            "    1,",
+            "    Enum.EasingStyle.Quad,",
+            "    Enum.EasingDirection.Out,",
+            "    0,",
+            "    false,",
+            "    0",
+            ")",
+		],
+    },
+    "Action": {
+        "prefix": "RAction",
+        "body": [
+            "do",
+			"    local action = {",
+            "        name = $1,",
+            "    }",
+            "    playerState:set(S.$2, \"$3\", action)",
+            "end"
+		],
+    },
+    "Strings": {
+        "prefix": "RString",
+        "body": [
+			"local S = Data.Strings.Strings",
+		],
+    },
+    "PrintTableDeep": {
+        "prefix": "RPrintTableDeep",
+        "body": [
+			"local TableUtils = Mod:find({\"Table\", \"Utils\"})",
+            "TableUtils.print($1)",
+		],
+    },
+    "FindGuiObj": {
+        "prefix": "RFindGuiObj",
+        "body": [
+			"local $1 = ClientSherlock:find({\"Gui\"}, {guiName=gui.Name, refName=\"$2\"})",
+		],
+    },
+    "EzRefUtils": {
+        "prefix": "REzRefUtils",
+        "body": [
+			"local EzRefUtils = Mod:find({\"EzRef\", \"Utils\"})",
+		],
+    },
+    "EzRefAsync": {
+        "prefix": "REzRefAsync",
+        "body": [
+			"local $1 = SharedSherlock:find({\"EzRef\", \"Get\"}, {inst=$2, refName=\"$3\"})",
+		],
+    },
+    "EzRefSync": {
+        "prefix": "REzRefSync",
+        "body": [
+			"local $1 = SharedSherlock:find({\"EzRef\", \"GetSync\"}, {inst=$2, refName=\"$3\"})",
+		],
+    },
+    "EzRefPromise": {
+        "prefix": "REzRefPromise",
+        "body": [
+			"SharedSherlock:find({\"EzRef\", \"GetPromise\"}, {inst=$1, refName=\"$2\"})",
+            ":andThen(function()",
+            "end)",
+            ":catch(function(err)",
+            "    warn(tostring(err))",
+            "end)",
+		],
+    },
+    "GuiScriptSkeleton": {
+        "prefix": "RGuiScriptSkeleton",
+        "body":[
+            "local Players = game:GetService(\"Players\")",
+            "local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+            "",
+            "local ClientSherlock = require(ReplicatedStorage.Sherlocks.ClientSherlock)",
+            "local SharedSherlock = require(ReplicatedStorage.Sherlocks.SharedSherlock)",
+            "local Data = require(ReplicatedStorage.Data.Data)",
+            "local Ux = ReplicatedStorage.Ux",
+            "",
+            "local GuiClasses = ReplicatedStorage.Ux.GuiClasses",
+            "",
+            "local localPlayer = Players.LocalPlayer",
+            "",
+            "local binder = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"PlayerState\"})",
+            "local playerState = SharedSherlock:find({\"Binders\", \"waitForInstToBind\"}, {binder=binder, inst=player})",
+            "",
+            "local gui = script:FindFirstAncestorWhichIsA(\"LayerCollector\")",
+            "local pageManager = ClientSherlock:find({\"PageManager\", \"FrontPage\"})",
+        ],
+    },
+    "FunctionUtils": {
+		"prefix": "RFunctionUtils",
+		"body": [
+			"local FunctionUtils = require(MegaPack.FunctionUtils.FunctionUtils)",
+		],
+    },
+    "HumanoidRootPart": {
+		"prefix": "RHumanoidRootPart",
+		"body": [
+			"HumanoidRootPart",
+		],
+    },
+    "PlayerState": {
+		"prefix": "RPlayerState",
+		"body": [
+			"local binderPlayerState = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"PlayerState\"})",
+            "local playerState = SharedSherlock:find({\"Binders\", \"waitForInstToBind\"}, {binder=binderPlayerState, inst=player})",
+
+		],
+    },
+    "PlayerGameState": {
+		"prefix": "RPlayerGameState",
+		"body": [
+			"local binderPlayerGameState = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"PlayerGameState\"})",
+            "local playerGameState = SharedSherlock:find({\"Binders\", \"waitForInstToBind\"}, {binder=binderPlayerGameState, inst=player})",
+
+		],
+    },
+    "GameState": {
+		"prefix": "RGameState",
+		"body": [
+			"local binderGameState = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"GameState\"})",
+            "local gameState = SharedSherlock:find({\"Binders\", \"waitForGameToBind\"}, {binder=binderGameState, inst=game})",
+
+		],
+    },
+    "Binder": {
+		"prefix": "RBinder",
+		"body": [
+			"local Binders = SharedSherlock:find({\"Binders\"})",
+		],
+    },
+    "RemoteEvents": {
+		"prefix": "RRemoteEvents",
+		"body": [
+			"local REvents = SharedSherlock:find({\"Remotes\", \"Events\"}, {root = ReplicatedStorage})",
+		],
+    },
+    "RemoteFunctions": {
+		"prefix": "RRemoteFunctions",
+		"body": [
+			"local RFunctions = SharedSherlock:find({\"Remotes\", \"Functions\"}, {root = ReplicatedStorage})",
+		],
+    },
+    "GaiaClient": {
+		"prefix": "RGaiaClient",
+		"body": [
+			"local GaiaClient = Mod:find({\"Gaia\", \"Client\"})",
+		],
+    },
+    "GaiaShared": {
+		"prefix": "RGaiaShared",
+		"body": [
+            "local GaiaShared = Mod:find({\"Gaia\", \"Shared\"})",
+		],
+    },
+    "GaiaServer": {
+		"prefix": "RGaiaServer",
+		"body": [
+            "local GaiaServer = Mod:find({\"Gaia\", \"Server\"})",
+		],
+    },
+    "RMp": {
+		"prefix": "RMp",
+		"body": [
+			"local MegaPack = ReplicatedStorage.MegaPack",
+		],
+    },
+    "RSignal": {
+		"prefix": "RSignal",
+		"body": [
+			"local SignalE = Mod:find({\"Signal\", \"Event\"})",
+		],
+    },
+    "RMaidModule": {
+		"prefix": "RMaidModule",
+		"body": [
+			"local Maid = Mod:find({\"Maid\"})",
+		],
+    },
+    "Debounce": {
+		"prefix": "RDebounce",
+		"body": [
+			"local Debounce = Mod:find({\"Debounce\", \"Debounce\"})",
+		],
+    },
+    "LocalDebounce": {
+		"prefix": "RLocalDebounce",
+		"body": [
+			"local LocalDebounce = Mod:find({\"Debounce\", \"Local\"})",
+		],
+    },
+    "FastSpawn": {
+		"prefix": "RFastSpawn",
+		"body": [
+			"local FastSpawn = Mod:find({\"FastSpawn\"})",
+		],
+    },
+    "RCronos": {
+		"prefix": "RCronos",
+		"body": [
+			"local Cronos = Mod:find({\"Cronos\", \"Cronos\"})",
+		],
+    },
+    "BigBen": {
+		"prefix": "RBigBen",
+		"body": [
+			"local BigBen = Mod:find({\"Cronos\", \"BigBen\"})",
+            "self._maid:Add(BigBen.every($1, \"Heartbeat\", \"frame\", true):Connect(function()",
+            "    ",
+            "end))"
+		],
+    },
+    "SharedSherlock": {
+		"prefix": "RSharedSherlock",
+		"body": [
+			"local SharedSherlock = Mod:find({\"Sherlocks\", \"Shared\"})",
+		],
+    },
+    "RClientSherlock": {
+		"prefix": "RClientSherlock",
+		"body": [
+            "local ClientSherlock = Mod:find({\"Sherlocks\", \"Client\"})",
+		],
+    },
+    "RServerSherlock": {
+		"prefix": "RServerSherlock",
+		"body": [
+            "local ServerSherlock = Mod:find({\"Sherlocks\", \"Server\"})",
+		],
+    },
+    "RData": {
+		"prefix": "RData",
+		"body": [
+            "local Data = Mod:find({\"Data\", \"Data\"})",
+		],
+    },
+    "LocalData": {
+		"prefix": "RDataLocal",
+		"body": [
+            "local LocalData = Mod:find({\"Data\", \"LocalData\"})",
+		],
+    },
+
+    "WaitForClientCache": {
+		"prefix": "WaitForClientCache",
+		"body": [
+			"local CacheFolder = player:WaitForChild(\"Cache\")",
+            "CacheFolder:WaitForChild(\"Ready\")",
+		],
+    },
+    
+    "ServerBEvent": {
+		"prefix": "ServerBEvent",
+		"body": [
+			"local $1BE = ServerStorage.Bindables.Events:WaitForChild(\"$1\")",
+		],
+    },
+
+    "ServerBFunction": {
+		"prefix": "ServerBFunction",
+		"body": [
+			"local $1BF = ServerStorage.Bindables.Functions:WaitForChild(\"$1\")",
+		],
+    },
+
+    "ClientBEvent": {
+		"prefix": "ClientBEvent",
+		"body": [
+			"local $1BE = player.PlayerScripts:WaitForChild(\"Bindables\").Events:WaitForChild(\"$1\")",
+		],
+    },
+
+    "ClientBFunction": {
+		"prefix": "ClientBFunction",
+		"body": [
+            "local $1BF = player.PlayerScripts:WaitForChild(\"Bindables\").Functions:WaitForChild(\"$1\")",
+		],
+    },
+
+    "REvent": {
+		"prefix": "REvent",
+		"body": [
+			"local $1RE = ReplicatedStorage.Remotes.Events:WaitForChild(\"$1\")",
+		],
+    },
+
+    "PrettyNames": {
+		"prefix": "RPrettyNames",
+		"body": [
+			"local PrettyNames = Data.Strings.PrettyName.PrettyName",
+		],
+    },
+
+    "RFunction": {
+		"prefix": "ClientBFunction",
+		"body": [
+			"local $1RF = ReplicatedStorage.Remotes.Functions:WaitForChild(\"$1\")",
+		],
+    },
+
+	"ApplyAction": {
+		"prefix": "ApplyAction",
+		"body": [
+			"do",
+			"\tlocal storeName = $1",
+			"\tlocal action = {",
+			"\t\tname=\"\",",
+			"\t}",
+			"\tthePlayer:applyDsAction(storeName, action)",
+			"end",
+		],
+	},
+
+    "ErrorReport": {
+		"prefix": "RErrorReport",
+		"body": [
+			"local ErrorReport = Mod:find({\"ErrorReport\", \"ErrorReport\"})"
+		],
+	},
+
+	"FireClient": {
+		"prefix": "FireClient",
+		"body": [
+			"$1:FireClient(player, $2)"
+		],
+	},
+
+	"FireServer": {
+		"prefix": "FireServer",
+		"body": [
+			"$1:FireServer($2)"
+		],
+	},
+
+	"FireAllClients": {
+		"prefix": "FireAllClients",
+		"body": [
+			"$1:FireAllClients($2)"
+		],
+    },
+    
+    "RPlayerManagerV2": {
+		"prefix": "RPlayerManagerV2",
+		"body": [
+			"local PlayerManager = require(ServerStorage.PlayerManager.ThePlayer.PlayerManager)"
+		],
+	},
+
+	"RPlayerManager": {
+		"prefix": "RPlayerManager",
+		"body": [
+			"local PlayerManager = require(ServerStorage.src.PlayerManager.PlayerManager)"
+		],
+	},
+
+	"RThePlayer": {
+		"prefix": "RThePlayer",
+		"body": [
+			"local thePlayer = PlayerManager.players[player.UserId]"
+		],
+	},
+
+    "Promise": {
+		"prefix": "RPromise",
+		"body": [
+			"local Promise = Mod:find({\"Promise\", \"Promise\"})",
+		],
+	},
+
+    "GetFields": {
+		"prefix": "RGetFields",
+		"body": [
+            "local BinderUtils = Mod:find({\"Binder\", \"Utils\"})",
+            "local WaitFor = Mod:find({\"WaitFor\", \"WaitFor\"})",
+			"function $1:getFields()",
+            "    return WaitFor.GetAsync({",
+            "        getter=function()",
+            "            local bindersData = {",
+            "                {\"PlayerState\", self.player},",
+            "                {\"CharState\", self.char},",
+            "                {\"CharParts\", self.char},",
+            "            }",
+            "            if not BinderUtils.addBindersToTable(self, bindersData) then return end",
+            "            local remotes = {",
+            "                ",
+            "            }",
+            "            local root",
+            "            if not BinderUtils.addRemotesToTable(self, root, remotes) then return end",
+            "            return true",
+            "        end,",
+            "        keepTrying=function()",
+            "            error(\"Implement\")",
+            "        end,",
+            "        cooldown=nil",
+            "    })",
+            "end",
+		],
+	},
+
+    "GetFieldsV2": {
+		"prefix": "RGetFieldsV2",
+		"body": [
+			"local promise = Promise.try(function()",
+            "    local ok, err = self:getFields()",
+            "    if not ok then",
+            "        err = err or \"Could not get fields.\"",
+            "        error(err)",
+            "    end",
+            "end)",
+            "    :andThen(function ()",
+            "        $1",
+            "    end)",
+            "self._maid:Add(promise, \"cancel\"))",
+		],
+	},
+
+	"PromiseAwait": {
+		"prefix": "RPromiseAwait",
+		"body": [
+			"local ok, err = Promise.$1()",
+			"\t:await()",
+			"if not ok then warn(tostring(err)) end",
+			""
+		],
+	},
+
+	"TweenTemplate": {
+		"prefix": "RTweenTemplate",
+		"body": [
+			"local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out, 0, false, 0)",
+			"local goal = {}",
+			"local tween = TweenService:Create($1, tweenInfo, goal)",
+			""
+		],
+	},
+
+    "TweenGroup": {
+		"prefix": "RTweenGroup",
+		"body": [
+			"local TweenGroup = Mod:find({\"Tween\", \"TweenGroup\"})",
+		],
+	},
+
+	"AddMaid": {
+		"prefix": "RAddMaid",
+		"body": [
+			"self._maid = Maid.new()",
+		],
+	},
+
+    "Bach": {
+		"prefix": "RBach",
+		"body": [
+			"local Bach = Mod:find({\"Bach\", \"Bach\"})",
+		],
+	},
+
+	"MegaPackBasic": {
+		"prefix": "RMegaPackBasic",
+		"body": [
+			"local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+			"",
+			"local MegaPack = ReplicatedStorage.MegaPack",
+			"local Janitor = require(MegaPack.Cleaner.Janitor.Janitor)",
+			"local Promise = require(MegaPack.Promise.Promise)",
+			""
+		],
+	},
+	"ModuleAggregatorInit": {
+		"prefix": "RModuleAggregatorInit",
+		"body": [
+			"local module = {}",
+			"",
+			"for _, mod in ipairs(script:GetChildren()) do",
+			"\tmodule[mod.Name] = require(mod)",
+			"end",
+			"",
+			"return module"
+		],
+	},
+    "ModuleAggregator": {
+		"prefix": "RModuleAggregator",
+		"body": [
+			"local module = {}",
+			"",
+			"for _, mod in ipairs(script.Parent:GetChildren()) do",
+            "    if mod == script then continue end",
+			"    module[mod.Name] = require(mod)",
+			"end",
+			"",
+			"return module"
+		],
+	},
+	"GetPropertyChangedSignal": {
+		"prefix": "RGetPropertyChangedSignal",
+		"body": [
+			"$1:GetPropertyChangedSignal($2):$3",
+			"$4"
+		],
+	},
+    "SetNetworkOwner": {
+		"prefix": "RSetNetworkOwner",
+		"body": [
+			"$1:SetNetworkOwner($2)",
+		],
+	},
+    "RaycastParams": {
+		"prefix": "RRaycastParams",
+		"body": [
+			"local raycastParams = RaycastParams.new()",
+            "raycastParams.FilterType = Enum.RaycastFilterType.Blacklist",
+            "raycastParams.FilterDescendantsInstances = {}",
+            "raycastParams.CollisionGroup = \"Default\"",
+            "raycastParams.IgnoreWater = true",
+		],
+	},
+    "Getter": {
+		"prefix": "RGetter",
+		"body": [
+			"local $1 = SharedSherlock:find({\"WaitFor\", \"Val\"}, {",
+            "    getter=function()",
+            "        $2",
+            "    end,",
+            "    keepTrying=function()",
+            "        $3",
+            "    end,",
+            "})",
+		],
+	},
+	"ClassDeclarationServer": {
+		"prefix": "RClassDeclarationServer",
+		"body": [
+            "local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+            "local ServerStorage = game:GetService(\"ServerStorage\")",
+            "",
+            "local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)",
+            "local Mod = require(ComposedKey.getAsync(ReplicatedStorage, {\"Sherlocks\", \"Shared\", \"Mod\"}))",
+            "local Maid = Mod:find({\"Maid\"})",
+            "local Cronos = Mod:find({\"Cronos\", \"Cronos\"})",
+            "local SharedSherlock = Mod:find({\"Sherlocks\", \"Shared\"})",
+            "local GaiaServer = Mod:find({\"Gaia\", \"Server\"})",
+            "local PlayerNetwork = Mod:find({\"Network\", \"PlayerNetwork\"})",
+            "local WaitFor = Mod:find({\"WaitFor\", \"WaitFor\"})",
+            "local BinderUtils = Mod:find({\"Binder\", \"Utils\"})",
+            "local PlayerUtils = Mod:find({\"PlayerUtils\", \"PlayerUtils\"})",
+            "local Data = Mod:find({\"Data\", \"Data\"})",
+            "local S = Data.Strings.Strings",
+            "local TableUtils = Mod:find({\"Table\", \"Utils\"})",
+            "",
+			"local $1 = {}",
+            "$1.__index = $1",
+            "$1.className = \"$1\"",
+			"$1.TAG_NAME = $1.className",
+			"",
+			"function $1.new($2)",
+			"    local self = {",
+            "        $2 = $2,",
+            "        _maid = Maid.new(),",
+            "    }",
+			"    setmetatable(self, $1)",
+            "",
+            "    if not self:getFields() then return end",
+            "    self:createRemotes()",
+            "    self:setPlayerNetwork()",
+            "",
+			"    return self",
+			"end",
+            "",
+            "function $1:setPlayerNetwork()",
+            "    self.network = self._maid:Add(PlayerNetwork.new(self.player))",
+            "end",
+            "",
+            "function $1:createRemotes()",
+            "    self._maid:Add(GaiaServer.createBinderRemotes(self, self., {",
+            "        events = {},",
+            "        functions = {},",
+            "    }))",
+            "end",
+			"",
+            "function $1:getFields()",
+            "    return WaitFor.GetAsync({",
+            "        getter=function()",
+            "            self.player = PlayerUtils:GetPlayerFromCharacter(self.char)",
+            "            if not self.player then return end",
+            "",
+            "            local charId = self.char:GetAttribute(\"uid\")",
+            "            self.charEvents = ComposedKey.getFirstDescendant(ReplicatedStorage, {\"CharsEvents\", charId})",
+            "            if not self.charEvents then return end",
+            "",
+            "            local bindersData = {",
+            "                {\"PlayerState\", self.player},",
+            "                {\"CharState\", self.char},",
+            "                {\"CharParts\", self.char},",
+            "            }",
+            "            if not BinderUtils.addBindersToTable(self, bindersData) then return end",
+            "",
+            "            return true",
+            "        end,",
+            "        keepTrying=function()",
+            "            return self.player.Parent",
+            "        end,",
+            "        cooldown=nil",
+            "    })",
+            "end",
+            "",
+			"function $1:Destroy()",
+            "    self._maid:Destroy()",
+			"end",
+            "",
+            "return $1",
+		],
+	},
+    "ClassDeclarationClient": {
+		"prefix": "RClassDeclarationClient",
+		"body": [
+            "local Players = game:GetService(\"Players\")",
+            "local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+            "",
+            "local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)",
+            "local Mod = require(ComposedKey.getAsync(ReplicatedStorage, {\"Sherlocks\", \"Shared\", \"Mod\"}))",
+            "local Maid = Mod:find({\"Maid\"})",
+            "local SharedSherlock = Mod:find({\"Sherlocks\", \"Shared\"})",
+            "local Cronos = Mod:find({\"Cronos\", \"Cronos\"})",
+            "local Data = Mod:find({\"Data\", \"Data\"})",
+            "local S = Data.Strings.Strings",
+            "",
+            "local localPlayer = Players.LocalPlayer",
+            "local binderPlayerState = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"PlayerState\"})",
+            "local playerState = SharedSherlock:find({\"Binders\", \"waitForInstToBind\"}, {binder=binderPlayerState, inst=localPlayer})",
+            "",
+			"local $1 = {}",
+            "$1.__index = $1",
+            "$1.className = \"$1\"",
+			"$1.TAG_NAME = $1.className",
+			"",
+			"function $1.new($2)",
+			"    local self = {",
+            "        $2 = $2,",
+            "        _maid = Maid.new(),",
+            "    }",
+			"    setmetatable(self, $1)",
+            "",
+			"    return self",
+			"end",
+			"",
+			"function $1:Destroy()",
+            "    self._maid:Destroy()",
+			"end",
+			"",
+			"return $1"
+		],
+	},
+    "ClassDeclarationCharClient": {
+		"prefix": "RClassDeclarationCharClient",
+		"body": [
+            "local Players = game:GetService(\"Players\")",
+            "local ReplicatedStorage = game:GetService(\"ReplicatedStorage\")",
+            "",
+            "local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)",
+            "local Mod = require(ComposedKey.getAsync(ReplicatedStorage, {\"Sherlocks\", \"Shared\", \"Mod\"}))",
+            "local Cronos = Mod:find({\"Cronos\", \"Cronos\"})",
+            "local Maid = Mod:find({\"Maid\"})",
+            "local SharedSherlock = Mod:find({\"Sherlocks\", \"Shared\"})",
+            "local CharUtils = Mod:find({\"Validators\", \"CharUtils\"})",
+            "local Data = Mod:find({\"Data\", \"Data\"})",
+            "local S = Data.Strings.Strings",
+            "",
+            "local localPlayer = Players.LocalPlayer",
+            "local binderPlayerState = SharedSherlock:find({\"Binders\", \"getBinder\"}, {tag=\"PlayerState\"})",
+            "local playerState = SharedSherlock:find({\"Binders\", \"waitForInstToBind\"}, {binder=binderPlayerState, inst=localPlayer})",
+            "",
+			"local $1 = {}",
+            "$1.__index = $1",
+            "$1.className = \"$1\"",
+			"$1.TAG_NAME = $1.className",
+			"",
+			"function $1.new(char)",
+            "    local isLocalChar = CharUtils.isLocalChar(char)",
+            "    if not isLocalChar then return end",
+            "",
+			"    local self = {",
+            "        char = char,",
+            "        _maid = Maid.new(),",
+            "    }",
+			"    setmetatable(self, $1)",
+            "",
+			"    return self",
+			"end",
+			"",
+			"function $1:Destroy()",
+            "    self._maid:Destroy()",
+			"end",
+			"",
+			"return $1"
+		],
+	},
+	"OnServerEvent": {
+		"prefix": "OnServerEvent",
+		"body": "OnServerEvent"
+	},
+	"OnClientEvent": {
+		"prefix": "OnClientEvent",
+		"body": "OnClientEvent"
+	},
+	"PrintTable" : {
+		"prefix": "RPrintTable",
+		"body": [
+			"for k, v in pairs($1) do",
+			"\tprint(k, v)",
+			"end"
+		],
+	},
+	"Workspace" : {
+		"prefix": "workspace",
+		"body": [
+			"workspace.",
+		],
+	},
+	"Vector3" : {
+		"prefix": "Vector3",
+		"body": [
+			"Vector3.new($1, $2, $3)",
+		],
+	},
+	"Instance" : {
+		"prefix": "Instance",
+		"body": [
+			"local $1 = Instance.new(\"$2\")",
+			"$1.Name = $3",
+			"$1.Parent = $4",
+		],
+	},
+	"ipairs" : {
+		"prefix": "ipairs",
+		"body": [
+			"for i, $1 in ipairs($2) do",
+			"\t$3",
+			"end",
+		],
+	},
+	"pairs" : {
+		"prefix": "pairs",
+		"body": [
+			"for $1, $2 in pairs($3) do",
+			"\t$4",
+			"end",
+		],
+	},
+	"Get Local Player" : {
+		"prefix": "RLocalPlayer",
+		"body": [
+			"local localPlayer = Players.LocalPlayer",
+			"$1"
+		],
+	},
+	"Get Player Gui" : {
+		"prefix": "RPlayerGui",
+		"body": [
+			"local PlayerGui  = $1:WaitForChild(\"PlayerGui\")",
+			"$2"
+		],
+	},
+	"Get Player Scripts" : {
+		"prefix": "RPlayerScripts",
+		"body": [
+			"local PlayerScripts  = $1.PlayerScripts",
+			"$2"
+		],
+	},
+	"Script Parent" : {
+		"prefix": "RScriptParent",
+		"body": [
+			"local $1  = script.Parent",
+			"$2"
+		],
+	},
+    "Get Character from Player" : {
+		"prefix": "RGetCharacter",
+		"body": [
+			"local char = player.Character",
+			"if not (char and char.Parent) then return end"
+		],
+	},
+	"Get Character from Player (Server)" : {
+		"prefix": "RCharacterFromPlayerServer",
+		"body": [
+			"local character = player.Character or player.CharacterAdded:Wait()",
+			"$1"
+		],
+	},
+	"Get Character from Player (Client)" : {
+		"prefix": "RCharacterFromPlayerClient",
+		"body": [
+			"local character = player.Character",
+			"if not character then",
+			"\tcharacter = player.CharacterAdded:Wait()",
+			"end",
+			"while character.Parent == nil do",
+			"\tcharacter.AncestryChanged:Wait()",
+			"end",
+			"$1"
+		],
+	},
+	"Get Humanoid from Character" : {
+		"prefix": "RHumanoidFromCharacter",
+		"body": [
+			"local humanoid = character:WaitForChild(\"Humanoid\")",
+			"$1"
+		],
+	},
+	"Module Template": {
+		"prefix": "RModuleTemplate",
+		"body": [
+			"local module = {}",
+			"",
+			"$2",
+			"",
+			"return module"
+		],
+	},
+	"Wait For Child": {
+		"prefix": "RWaitForChild",
+		"body": [
+			"WaitForChild(\"$1\")",
+			"$2",
+		],
+	},
+	"Find First Child": {
+		"prefix": "RFindFirstChild",
+		"body": [
+			"FindFirstChild(\"$1\")",
+			"$2",
+		],
+	},
+	"Find First Ancestor": {
+		"prefix": "RFindFirstAncestor",
+		"body": [
+			"FindFirstAncestor(\"$1\")",
+			"$2",
+		],
+	},
+	"Find First Ancestor Of Class": {
+		"prefix": "RFindFirstAncestorOfClass",
+		"body": [
+			"FindFirstAncestorOfClass(\"$1\")",
+			"$2",
+		],
+	},
+	"Find First Ancestor Which Is A": {
+		"prefix": "RFindFirstAncestorWhichIsA",
+		"body": [
+			"FindFirstAncestorWhichIsA(\"$1\")",
+			"$2",
+		],
+	},
+	"Get Children": {
+		"prefix": "RGetChildren",
+		"body": [
+			"GetChildren(\"$1\")",
+			"$2",
+		],
+	},
+	"Get Descendants": {
+		"prefix": "RGetDescendants",
+		"body": [
+			"GetDescendants(\"$1\")",
+			"$2",
+		],
+	},
+	"Character Added Template": {
+		"prefix": "RCharAdded",
+		"body": [
+			"local Players = game:GetService(\"Players\")",
+			"",
+			"local function onCharacterAdded(char)",
+			"",
+			"end",
+			"",
+			"local function onPlayerAdded(player)",
+			"\tplayer.CharacterAdded:Connect(onCharacterAdded)",
+			"\tlocal char = player.Character",
+			"\tif char then",
+			"\t\tonCharacterAdded(char)",
+			"\tend",
+			"end",
+			"",
+			"Players.PlayerAdded:Connect(onPlayerAdded)",
+			"for _, plr in ipairs(Players:GetPlayers()) do",
+    		"\tonPlayerAdded(plr)",
+			"end",
+		],
+	},
+}
