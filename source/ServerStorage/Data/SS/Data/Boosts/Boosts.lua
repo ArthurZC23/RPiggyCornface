@@ -10,22 +10,22 @@ local S = require(Data.Strings.Strings)
 local module = {}
 
 module.idData = {
-    ["1"] = {
-        name = S.SpeedBoost,
-        thumbnail = "rbxassetid://18668121506",
-    },
-    ["2"] = {
-        name = S.NoDamageBoost,
-        thumbnail = "rbxassetid://18347932792",
-    },
-    ["3"] = {
-        name = S.GhostBoost,
-        thumbnail = "rbxassetid://18669068827",
-    },
-    ["4"] = {
-        name = S.JumpBoost,
-        thumbnail = "rbxassetid://18669090696",
-    },
+    -- ["1"] = {
+    --     name = S.SpeedBoost,
+    --     thumbnail = "rbxassetid://18668121506",
+    -- },
+    -- ["2"] = {
+    --     name = S.NoDamageBoost,
+    --     thumbnail = "rbxassetid://18347932792",
+    -- },
+    -- ["3"] = {
+    --     name = S.GhostBoost,
+    --     thumbnail = "rbxassetid://18669068827",
+    -- },
+    -- ["4"] = {
+    --     name = S.JumpBoost,
+    --     thumbnail = "rbxassetid://18669090696",
+    -- },
 }
 
 module.nameData = {}

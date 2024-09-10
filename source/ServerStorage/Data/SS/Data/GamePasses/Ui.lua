@@ -17,72 +17,7 @@ module = {
     },
     color = Color3.fromRGB(10, 137, 195):Lerp(Color3.new(1, 1, 1), 0.1),
     gpProducts = {
-        ["1"] = {
-            name=S.VipGp,
-            LayoutOrder = 1,
-            shortDescription = {
-                Text=("Vip"),
-                TextColor3=Color3.fromRGB(255, 255, 255),
-            },
-            longDescription={
-                Text=("Vip"),
-                TextColor3=Color3.fromRGB(231, 7, 60),
-                TextStrokeColor3 = Color3.new(0, 0, 0),
-                TextStrokeTransparency = 0.5,
-            },
-            thumbnail = {},
-            colors = {
-                default=Color3.fromRGB(255, 255, 255),
-                hover=Color3.fromRGB(233, 215, 19),
-            },
-            priceInRobux = {
-                TextColor3=Color3.fromRGB(0, 255, 0),
-            }
-        },
-        ["2"] = {
-            name=S.MetalDipPack,
-            LayoutOrder = 2,
-            shortDescription = {
-                Text=("Metal Dip Pack (x3)"),
-                TextColor3=Color3.fromRGB(255, 255, 255),
-            },
-            longDescription={
-                Text=("Metal Dip Pack (x3)"),
-                TextColor3=Color3.fromRGB(231, 7, 60),
-                TextStrokeColor3 = Color3.new(0, 0, 0),
-                TextStrokeTransparency = 0.5,
-            },
-            thumbnail = {},
-            colors = {
-                default=Color3.fromRGB(255, 255, 255),
-                hover=Color3.fromRGB(233, 215, 19),
-            },
-            priceInRobux = {
-                TextColor3=Color3.fromRGB(0, 255, 0),
-            }
-        },
-        ["3"] = {
-            name=S.RainbowMonsterSkin,
-            LayoutOrder = 3,
-            shortDescription = {
-                Text=("Rainbow Cornface"),
-                TextColor3=Color3.fromRGB(255, 255, 255),
-            },
-            longDescription={
-                Text=("Rainbow Cornface"),
-                TextColor3=Color3.fromRGB(231, 7, 60),
-                TextStrokeColor3 = Color3.new(0, 0, 0),
-                TextStrokeTransparency = 0.5,
-            },
-            thumbnail = {},
-            colors = {
-                default=Color3.fromRGB(255, 255, 255),
-                hover=Color3.fromRGB(233, 215, 19),
-            },
-            priceInRobux = {
-                TextColor3=Color3.fromRGB(0, 255, 0),
-            }
-        },
+
     }
 }
 

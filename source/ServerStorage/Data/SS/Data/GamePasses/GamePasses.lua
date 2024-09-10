@@ -16,27 +16,6 @@ module.data = {
     --     id="830143798",
     --     mockId = ""
     -- },
-    {
-        name=S.VipGp,
-        prettyName = "VIP",
-        color = Color3.fromRGB(200, 200, 0),
-        id="872191424",
-        mockId = ""
-    },
-    {
-        name=S.MetalDipPack,
-        prettyName = "Metal Dip Pack (x3)",
-        color = Color3.fromRGB(249, 249, 128),
-        id="910991352",
-        mockId = ""
-    },
-    {
-        name=S.RainbowMonsterSkin,
-        prettyName = "Rainbow Cornface",
-        color = Color3.fromRGB(249, 249, 128),
-        id="911311691",
-        mockId = ""
-    },
 }
 local function createMappings()
     module.nameToData = {}

@@ -18,9 +18,9 @@ module.names = {
     SpinWheels = "SpinWheels",
     Chests = "Chests",
     Money_1 = "Money_1",
-    MoneyMonster = "MoneyMonster",
+    -- MoneyMonster = "MoneyMonster",
     MonsterSkins = "MonsterSkins",
-    Trails = "Trails",
+    -- Trails = "Trails",
     -----------
     Ban = "Ban",
     Badges = "Badges",
@@ -51,22 +51,21 @@ module.default = {
     Money_1 = {
         current = 0,
     },
-    -- Money used to become the monster
-    MoneyMonster = {
-        current = 0,
-    },
+    -- MoneyMonster = {
+    --     current = 0,
+    -- },
     MonsterSkins = {
         eq = "1",
         st = {
             ["1"] = {},
         }
     },
-    Trails = {
-        eq = "1",
-        st = {
-           ["1"] = true,
-        },
-    },
+    -- Trails = {
+    --     eq = "1",
+    --     st = {
+    --        ["1"] = true,
+    --     },
+    -- },
     -----------------------
     Ban = {
 

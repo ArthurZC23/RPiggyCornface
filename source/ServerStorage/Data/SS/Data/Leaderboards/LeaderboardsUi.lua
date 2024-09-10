@@ -11,21 +11,21 @@ local S = require(Data.Strings.Strings)
 
 local module = {}
 
-module["1"] = {
-    Title = ("Top %s"):format(MoneyData[S.Money_1].prettyName),
-}
+-- module["1"] = {
+--     Title = ("Top %s"):format(MoneyData[S.Money_1].prettyName),
+-- }
 
-module["2"] = {
-    Title = ("Top %s"):format(PrettyNames[S.FinishChapter]),
-}
+-- module["2"] = {
+--     Title = ("Top %s"):format(PrettyNames[S.FinishChapter]),
+-- }
 
-module["3"] = {
-    Title = ("Top %s"):format(PrettyNames[S.FinishChapter1]),
-}
+-- module["3"] = {
+--     Title = ("Top %s"):format(PrettyNames[S.FinishChapter1]),
+-- }
 
-module["4"] = {
-    Title = ("Top %s"):format(PrettyNames[S.Kills]),
-}
+-- module["4"] = {
+--     Title = ("Top %s"):format(PrettyNames[S.Kills]),
+-- }
 
 for id, data in pairs(module) do
     data.TitleStyle = data.TitleStyle or {}

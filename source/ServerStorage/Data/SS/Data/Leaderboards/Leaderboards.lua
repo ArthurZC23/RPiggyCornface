@@ -7,25 +7,25 @@ local DataStoreService = require(ServerStorage.DataStoreService)
 
 local module = {}
 
-module["1"] = {
-    scoreType = ScoresData.scoreTypes.Money_1,
-    timeType = ScoresData.timeTypes.allTime,
-}
+-- module["1"] = {
+--     scoreType = ScoresData.scoreTypes.Money_1,
+--     timeType = ScoresData.timeTypes.allTime,
+-- }
 
-module["2"] = {
-    scoreType = ScoresData.scoreTypes.FinishChapter,
-    timeType = ScoresData.timeTypes.allTime,
-}
+-- module["2"] = {
+--     scoreType = ScoresData.scoreTypes.FinishChapter,
+--     timeType = ScoresData.timeTypes.allTime,
+-- }
 
-module["3"] = {
-    scoreType = ScoresData.scoreTypes.FinishChapter1,
-    timeType = ScoresData.timeTypes.allTime,
-}
+-- module["3"] = {
+--     scoreType = ScoresData.scoreTypes.FinishChapter1,
+--     timeType = ScoresData.timeTypes.allTime,
+-- }
 
-module["4"] = {
-    scoreType = ScoresData.scoreTypes.Kills,
-    timeType = ScoresData.timeTypes.allTime,
-}
+-- module["4"] = {
+--     scoreType = ScoresData.scoreTypes.Kills,
+--     timeType = ScoresData.timeTypes.allTime,
+-- }
 
 for id, data in pairs(module) do
     data.maxNumberEntries = data.maxNumberEntries or 100

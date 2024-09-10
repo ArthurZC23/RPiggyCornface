@@ -1,21 +1,21 @@
 local module = {
-    name = "ScaryMazeCornface",
-    prettyName = "Ecape Cornface",
-    maxPlayers = 15,
+    name = "CornfacePiggyGame",
+    prettyName = "Cornface [Story]",
+    maxPlayers = 6,
     rigType = "R15",
     developer = {
         isGroup = true,
-        name = "Only Scary Games",
-        id = "34149564",
+        name = "Cornface",
+        id = "34933232",
     },
-    version = "1.3.2",
+    version = "1.0.0",
     serverTypePlaceId = {
-        ["TEST"] = 18429305768,
-        ["PRODUCTION"] = 18429285861,
+        ["TEST"] = 130457830477258,
+        ["PRODUCTION"] = 92144876747808,
     },
     placeIds = {
-        [18429305768] = "TEST",
-        [18429285861] = "PRODUCTION",
+        [130457830477258] = "TEST",
+        [92144876747808] = "PRODUCTION",
     },
     updatePlaceIds = {
         [0] = "",
