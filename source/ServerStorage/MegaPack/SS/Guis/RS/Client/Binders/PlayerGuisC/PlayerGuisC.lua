@@ -6,7 +6,6 @@ local ComposedKey = require(ReplicatedStorage.TableUtils.ComposedKey)
 local Mod = require(ComposedKey.getAsync(ReplicatedStorage, {"Sherlocks", "Shared", "Mod"}))
 local Maid = Mod:find({"Maid"})
 local Data = Mod:find({"Data", "Data"})
-local GaiaShared = Mod:find({"Gaia", "Shared"})
 local S = Data.Strings.Strings
 local WaitFor = Mod:find({"WaitFor", "WaitFor"})
 
@@ -28,7 +27,6 @@ function PlayerGuisC.new(player)
     setmetatable(self, PlayerGuisC)
 
     if not self:getFields() then return end
-    self:createSignals()
     self:initGuis()
     return self
 end
@@ -61,13 +59,6 @@ function PlayerGuisC:addController(id, controller)
         error(("Gui Controller id %s is already taken by %s."):format(controller.className, self.controllers[id].className))
     end
     self.controllers[id] = controller
-    self.AddControllerSE:Fire(controller)
-end
-
-function PlayerGuisC:createSignals()
-    return self._maid:Add(GaiaShared.createBinderSignals(self, self.player, {
-        events = {"AddController"},
-    }))
 end
 
 function PlayerGuisC:getFields()

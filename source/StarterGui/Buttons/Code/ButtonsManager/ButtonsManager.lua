@@ -51,11 +51,13 @@ local function handleOpenButtons(ctrl)
     for guiKey, data in pairs(guisData) do
         local openData = data.open
         if not openData.btnName then continue end
+        if data.team and data.team ~= localPlayer:GetAttribute("team") then
+            continue
+        end
 
         local buttonFrame = SharedSherlock:find({"EzRef", "Get"}, {inst=PlayerGui:WaitForChild("Buttons"), refName=openData.btnName})
         local btn = buttonFrame:FindFirstChildWhichIsA("GuiButton")
-        local kwargs = openData.kwargs or {}
-        maid:Add2(btn.Activated:Connect(function() open(ctrl, guiKey, false, kwargs) end))
+        maid:Add2(btn.Activated:Connect(function() open(ctrl, guiKey, false) end))
         if openData.uxKwargs then maid:Add2(ButtonsUx.addUx(btn, openData.uxKwargs)) end
 
         -- if Platforms.getPlatform() == Platforms.Console then
@@ -99,7 +101,7 @@ local function handleOpenEventLikeBtn(ctrl)
     return maid
 end
 
-local function close(ctrl, guiKey, schedule, kwargs)
+local function close(ctrl, guiKey, schedule)
     local guiData = guisData[guiKey]
     local view
     local guiName = guiData.name
@@ -109,7 +111,7 @@ local function close(ctrl, guiKey, schedule, kwargs)
     elseif guiData.guiType == "Char" then
         view = ctrl.charGuis.controllers[guiName].view
     end
-    view:close(kwargs)
+    view:close()
 end
 
 local UserInputService = game:GetService("UserInputService")
@@ -139,9 +141,8 @@ local function handleCloseButtons(ctrl)
         btn.TextLabel.Text = "B"
     end
     for guiKey, data in pairs(guisData) do
-        local closeData = data.close
-        if not closeData.hasExitBtn then continue end
-        local exitBtn = closeData.exitButton or "ExitButton"
+        if not data.close.hasExitBtn then continue end
+        local exitBtn = data.close.exitButton or "ExitButton"
         local buttonFrame = SharedSherlock:find({"EzRef", "Get"}, {inst=PlayerGui:WaitForChild(data.open.guiName), refName=exitBtn})
         local btn = buttonFrame:FindFirstChildWhichIsA("GuiButton")
         if Platforms.getPlatform() == Platforms.Platforms.Console then
@@ -149,8 +150,7 @@ local function handleCloseButtons(ctrl)
                 handleConsoleGuiExit(btn, guiKey)
             end)
         end
-        local kwargs = closeData.kwargs or {}
-        maid:Add2(btn.Activated:Connect(function() close(ctrl, guiKey, false, kwargs) end))
+        maid:Add2(btn.Activated:Connect(function() close(ctrl, guiKey, false) end))
         maid:Add2(ButtonsUx.addUx(btn, {
             dilatation = {
                 expandFactor = {
@@ -172,8 +172,8 @@ local function handleCloseEventLikeBtn(ctrl)
         })
         maid:Add2(Bindables.Events[data.close.eventLikeBtn])
         local signalE = maid:Add2(SharedSherlock:find({"Bindable", "async"}, {root=ReplicatedStorage, signal=data.close.eventLikeBtn}))
-        maid:Add2(signalE:Connect(function(schedule, kwargs)
-            close(ctrl, guiKey, schedule, kwargs)
+        maid:Add2(signalE:Connect(function(schedule)
+            close(ctrl, guiKey, schedule)
         end))
     end
     return maid
@@ -192,6 +192,22 @@ function module.handleClose(ctrl)
     local maid = Maid.new()
     maid:Add2(handleCloseButtons(ctrl))
     maid:Add2(handleCloseEventLikeBtn(ctrl))
+    return maid
+end
+
+function module.filterTeamButtons(ctrl)
+    local maid = Maid.new()
+    for guiKey, data in pairs(guisData) do
+        if not data.team then continue end
+        local openData = data.open
+        local ButtonFrame = SharedSherlock:find({"EzRef", "Get"}, {inst=PlayerGui:WaitForChild("Buttons"), refName=openData.btnName})
+        if data.team == localPlayer:GetAttribute("team") then
+            ButtonFrame.Visible = true
+            continue
+        end
+        ButtonFrame:Destroy()
+
+    end
     return maid
 end
 

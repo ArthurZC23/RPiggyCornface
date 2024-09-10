@@ -37,6 +37,7 @@ function Controller.new(charGuis)
 end
 
 function Controller:handleButtonsManager()
+    self._maid:Add2(ButtonsManager.filterTeamButtons(self))
     self._maid:Add2(ButtonsManager.handleClose(self))
     self._maid:Add2(ButtonsManager.handleOpen(self))
 end

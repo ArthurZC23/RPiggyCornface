@@ -56,15 +56,15 @@ module.tags = {
     -- "PlayerMobileController",
     "CustomStateOnStudio",
     ---------------------
-    "PlayerFinishGame",
-    "PlayerTeamGuis",
-    "PlayerBoosts",
-    "PlayerMonsterSkins",
-    "PlayerBecomeMonster",
-    "PlayerMoney_1",
-    "PlayerMoney_1Spawner",
-    "PlayerChest",
-    "PlayerSpinWheel",
+    -- "PlayerFinishGame",
+    -- "PlayerTeamGuis",
+    -- "PlayerBoosts",
+    -- "PlayerMonsterSkins",
+    -- "PlayerBecomeMonster",
+    -- "PlayerMoney_1",
+    -- "PlayerMoney_1Spawner",
+    -- "PlayerChest",
+    -- "PlayerSpinWheel",
 }
 
 return module
