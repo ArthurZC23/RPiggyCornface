@@ -85,31 +85,31 @@ function PlayerCharacterSpawner:spawn(playerState)
 
         return Monster
     elseif player:GetAttribute("team") == "monster" then
-        local monsterSkinState = playerState:get(S.Stores, "MonsterSkins")
-        local Monster = Data.MonsterSkins.MonsterSkins.idData[monsterSkinState.eq].monsterModel:Clone()
-        -- Monster:SetAttribute("charRunAnimationFactor", 1.5)
-        Monster:SetAttribute("monsterId", "1")
-        Monster:SetAttribute("NpcId", nil)
-        Monster:SetAttribute("rigType", "R15")
-        Monster:SetAttribute("CoreAnimations", "Monster")
-        Monster.Humanoid.WalkSpeed = 0
-        Monster:AddTag("PlayerMonster")
-        -- Monster:AddTag("CharCoreAnimationsMonster")
-        Monster:AddTag("Monster")
-        Monster:SetAttribute("canKill", false)
-        Monster:PivotTo(self.MonsterSpawn:GetPivot())
-        local Humanoid = Monster.Humanoid
+        -- local monsterSkinState = playerState:get(S.Stores, "MonsterSkins")
+        -- local Monster = Data.MonsterSkins.MonsterSkins.idData[monsterSkinState.eq].monsterModel:Clone()
+        -- -- Monster:SetAttribute("charRunAnimationFactor", 1.5)
+        -- Monster:SetAttribute("monsterId", "1")
+        -- Monster:SetAttribute("NpcId", nil)
+        -- Monster:SetAttribute("rigType", "R15")
+        -- Monster:SetAttribute("CoreAnimations", "Monster")
+        -- Monster.Humanoid.WalkSpeed = 0
+        -- Monster:AddTag("PlayerMonster")
+        -- -- Monster:AddTag("CharCoreAnimationsMonster")
+        -- Monster:AddTag("Monster")
+        -- Monster:SetAttribute("canKill", false)
+        -- Monster:PivotTo(self.MonsterSpawn:GetPivot())
+        -- local Humanoid = Monster.Humanoid
 
-        Monster.Name = player.Name
-        player.Character = Monster
-        Monster.Parent = workspace.PlayersCharacters
+        -- Monster.Name = player.Name
+        -- player.Character = Monster
+        -- Monster.Parent = workspace.PlayersCharacters
 
-        Promise.delay(3)
-        :andThen(function()
-            Humanoid.WalkSpeed = 16 - 0.5
-            Monster:SetAttribute("canKill", true)
-        end)
-        return Monster
+        -- Promise.delay(3)
+        -- :andThen(function()
+        --     Humanoid.WalkSpeed = 16 - 0.5
+        --     Monster:SetAttribute("canKill", true)
+        -- end)
+        -- return Monster
     elseif player:GetAttribute("team") == "human" or player:GetAttribute("team") == nil then
         player:LoadCharacter()
         local char = player.Character
@@ -122,43 +122,6 @@ function PlayerCharacterSpawner:handleCharSpawn(player)
     local function spawnChar()
         if not player.Parent then return end
         if self.playerState.isDestroyed then return end
-
-        local lifeState = self.playerState:get(S.Session, "Lives")
-        if lifeState.cur > 0 then
-            do
-                local action = {
-                    name = "setSyncCacheFlag",
-                    value = true,
-                }
-                self.playerState:set(S.Session, "Lives", action)
-            end
-        else
-            local gpState = self.playerState:get(S.Stores, "GamePasses")
-            local lives = 1
-            if self.firstSpawn and gpState.st[Data.GamePasses.GamePasses.nameToData[S.VipGp].id] then
-                lives = 2
-            end
-            do
-                local action = {
-                    name = "add",
-                    value = lives,
-                }
-                self.playerState:set(S.Session, "Lives", action)
-            end
-            do
-                local action = {
-                    name = "setSyncCacheFlag",
-                    value = false,
-                }
-                self.playerState:set(S.Session, "Lives", action)
-            end
-            do
-                local action = {
-                    name = "reset",
-                }
-                self.playerState:set(S.Session, "MapTokens", action)
-            end
-        end
 
         local ok, char = pcall(function()
             return self:spawn(self.playerState)
@@ -213,9 +176,6 @@ end
 function PlayerCharacterSpawner:getFields(player)
     local ok = WaitFor.GetAsync({
         getter=function()
-            local Chapter1 = workspace.Map.Chapters["1"]
-            self.MonsterSpawn = SharedSherlock:find({"EzRef", "GetSync"}, {inst=Chapter1, refName="MonsterSpawn"})
-            if not self.MonsterSpawn then return end
 
             local BinderUtils = Mod:find({"Binder", "Utils"})
             local bindersData = {

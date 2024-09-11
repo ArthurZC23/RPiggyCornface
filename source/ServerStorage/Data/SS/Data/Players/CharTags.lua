@@ -33,8 +33,9 @@ module.tags = {
     -- "CharRagdoll",
     "CharRegionProps",
     -- ------------------
-    -- "CharTeamGuis",
-    -- "CharAnimations",
+    "CharTeamGuis",
+    {tag = "CharCrawl", teams = {MatchHuman = true}},
+    "CharAnimations",
     -- "CharAnimationMarkers",
     -- "CharSoundtrack",
     -- {tag = "CharTeamHuman", teams = {human = true}},
@@ -48,6 +49,7 @@ module.tags = {
     -- {tag = "CharChatM", teams = {human = true}},
     -- {tag = "CharItems", teams = {human = true}},
     -- {tag = "CharSpeedHuman", teams = {human = true}},
+
 }
 
 return module

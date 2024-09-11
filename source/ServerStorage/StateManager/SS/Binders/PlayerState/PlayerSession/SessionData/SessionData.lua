@@ -44,15 +44,6 @@ module.getInitialSession = function(playerState)
         },
 ------------------------
         _Game = {},
-        MapTokens = {
-            st = {},
-            total = 0,
-        },
-        Lives = {
-            cur = 0, -- current
-            previousLifeCache = nil,
-            shouldSyncCache = false,
-        },
         Items = {
             st = {},
         },
