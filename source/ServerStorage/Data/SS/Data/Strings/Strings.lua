@@ -91,6 +91,12 @@ local stringArrays = {
         "Legendary",
         "Godly",
     },
+    -- These are inner teams used by code to add binders and guis.
+    teams = {
+        "Lobby",
+        "MatchHuman",
+        "MatchMonster",
+    },
 }
 
 local module = {}

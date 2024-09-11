@@ -29,7 +29,7 @@ function PlayerTeamS.new(player)
     setmetatable(self, PlayerTeamS)
 
     if not self:getFields() then return end
-    self:setTeam()
+    self:setInitialTeam()
 
     self:createRemotes()
     self:setPlayerNetwork()
@@ -38,23 +38,23 @@ function PlayerTeamS.new(player)
     return self
 end
 
-function PlayerTeamS:setTeam()
-    if Data.Studio.Studio.spawnAsMonster then
-        self.player:SetAttribute("team", "studio")
+function PlayerTeamS:setInitialTeam()
+    if Data.Studio.Studio.initialTeam then
+        self.player:SetAttribute("team", Data.Studio.Studio.initialTeam)
     else
-        self.player:SetAttribute("team", "human")
+        self.player:SetAttribute("team", "Lobby")
     end
 end
 
 function PlayerTeamS:handleTeamChange()
     local function update()
-        local maid = self._maid:Add2(Maid.new(), "handleTeamChangeUpdate")
-        local team = self.player:GetAttribute("team")
-        local char = self.player.Character
-        if not (char and char.Parent) then return end
-        maid:Add2(WaitFor.BObj(char, "CharHades"):andThen(function(charHades)
-            charHades.KillSignalSE:Fire("ChangeTeam", {team = team})
-        end))
+        -- local maid = self._maid:Add2(Maid.new(), "handleTeamChangeUpdate")
+        -- local team = self.player:GetAttribute("team")
+        -- local char = self.player.Character
+        -- if not (char and char.Parent) then return end
+        -- maid:Add2(WaitFor.BObj(char, "CharHades"):andThen(function(charHades)
+        --     charHades.KillSignalSE:Fire("ChangeTeam", {team = team})
+        -- end))
 
         -- print("Test this")
         -- if team == "monster" then
@@ -66,9 +66,9 @@ function PlayerTeamS:handleTeamChange()
     end
     self._maid:Add2(self.player:GetAttributeChangedSignal("team"):Connect(update))
     local team = self.player:GetAttribute("team")
-    if team == "monster" then
-        update()
-    end
+    -- if team == "MatchMonster" then
+    --     update()
+    -- end
 end
 
 function PlayerTeamS:createRemotes()

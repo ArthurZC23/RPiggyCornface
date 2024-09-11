@@ -73,6 +73,7 @@ end
 
 function PlayerCharacterSpawner:spawn(playerState)
     local player = playerState.player
+    print("Team: ", player:GetAttribute("team"))
 
     if Data.Studio.Studio.spawnAsMonster then
         local monsterSkinState = playerState:get(S.Stores, "MonsterSkins")
@@ -110,7 +111,7 @@ function PlayerCharacterSpawner:spawn(playerState)
         --     Monster:SetAttribute("canKill", true)
         -- end)
         -- return Monster
-    elseif player:GetAttribute("team") == "human" or player:GetAttribute("team") == nil then
+    elseif player:GetAttribute("team") == "Lobby" then
         player:LoadCharacter()
         local char = player.Character
         char:SetAttribute("rigType", "R15")

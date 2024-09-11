@@ -28,6 +28,8 @@ module.group = {
 
 module.isUserPremium = true
 
+-- Team
+module.initialTeam = "engine"
 
 -- Monster
 module.muteMonsterSound = false
@@ -80,7 +82,6 @@ if not envs[ServerTypesData.ServerType] then
     module.noNpcMonster = false
     module.monsterCanKill = true
     module.muteMonsterSound = false
-    module.spawnAsMonster = false
 
 
     -- module.startScreen = true

@@ -8,6 +8,7 @@ module.asyncTags = {
     PlayerBindToClose = true,
     PlayerReplicator = true,
     PlayerBinder = true,
+    PlayerTeam = true, -- Player team is required for some logics
     --------------
 }
 
