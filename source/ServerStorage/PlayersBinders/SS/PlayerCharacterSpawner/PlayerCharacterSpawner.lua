@@ -85,7 +85,7 @@ function PlayerCharacterSpawner:spawn(playerState)
         Monster.Parent = workspace.PlayersCharacters
 
         return Monster
-    elseif player:GetAttribute("team") == "monster" then
+    elseif player:GetAttribute("team") == "Monster" then
         -- local monsterSkinState = playerState:get(S.Stores, "MonsterSkins")
         -- local Monster = Data.MonsterSkins.MonsterSkins.idData[monsterSkinState.eq].monsterModel:Clone()
         -- -- Monster:SetAttribute("charRunAnimationFactor", 1.5)
@@ -112,6 +112,16 @@ function PlayerCharacterSpawner:spawn(playerState)
         -- end)
         -- return Monster
     elseif player:GetAttribute("team") == "Lobby" then
+        player:LoadCharacter()
+        local char = player.Character
+        char:SetAttribute("rigType", "R15")
+        return player.Character
+    -- elseif player:GetAttribute("team") == "Engine" then
+    --     player:LoadCharacter()
+    --     local char = player.Character
+    --     char:SetAttribute("rigType", "R15")
+    --     return player.Character
+    else
         player:LoadCharacter()
         local char = player.Character
         char:SetAttribute("rigType", "R15")

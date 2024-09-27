@@ -26,7 +26,7 @@ local prototype = {
 local module = {}
 
 module = {
-    ["monster"] = {},
+    ["Monster"] = {},
     ["charPhyDummy"] = {
         [Enum.HumanoidStateType.FallingDown] = true,
         [Enum.HumanoidStateType.Running] = true,

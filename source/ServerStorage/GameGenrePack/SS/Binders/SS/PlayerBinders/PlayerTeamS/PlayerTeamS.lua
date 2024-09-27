@@ -57,7 +57,7 @@ function PlayerTeamS:handleTeamChange()
         -- end))
 
         -- print("Test this")
-        -- if team == "monster" then
+        -- if team == "Monster" then
         --     -- maid:Add2(self:handleIncreaseMonsterTimeWhileMonster())
         --     maid:Add2(self:handleMonsterTimer())
         -- else

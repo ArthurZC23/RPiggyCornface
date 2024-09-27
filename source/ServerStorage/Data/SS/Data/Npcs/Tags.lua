@@ -2,7 +2,7 @@ local module = {}
 
 module.tags = {}
 
-module.tags["monster"] = {
+module.tags["Monster"] = {
     "CharParts",
     "CharProps",
     "Monster",

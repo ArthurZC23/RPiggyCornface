@@ -2,7 +2,7 @@ local module = {}
 
 module.idData = {
     ["0"] = {
-        name = "engine",
+        name = "Engine",
         props = {
             Blur = {
                 Size = 0,

@@ -3,7 +3,7 @@ local module = {}
 module.npcs = {}
 
 module.npcs["1"] = {
-    npcType = "monster",
+    npcType = "Monster",
     monsterId = "1",
     tags = {},
 }

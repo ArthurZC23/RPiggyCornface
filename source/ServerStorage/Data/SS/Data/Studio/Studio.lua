@@ -29,7 +29,7 @@ module.group = {
 module.isUserPremium = true
 
 -- Team
-module.initialTeam = "engine"
+module.initialTeam = "Engine"
 
 -- Monster
 module.muteMonsterSound = false
