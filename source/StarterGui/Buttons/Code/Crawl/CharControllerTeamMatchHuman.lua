@@ -39,14 +39,9 @@ function Controller.new(charTeamGuis)
 end
 
 function Controller:toggleCrawl()
-    local crawlState = self.charState:get(S.LocalSession, "Crawl")
-    do
-        local action = {
-            name = "set",
-            value = not crawlState.on
-        }
-        self.charState:set(S.LocalSession, "Crawl", action)
-    end
+    local ToggleCrawlRE = ComposedKey.getEvent(self.char, "ToggleCrawl")
+    if not ToggleCrawlRE then return end
+    ToggleCrawlRE:FireServer()
 end
 
 local ContextActionService = game:GetService("ContextActionService")

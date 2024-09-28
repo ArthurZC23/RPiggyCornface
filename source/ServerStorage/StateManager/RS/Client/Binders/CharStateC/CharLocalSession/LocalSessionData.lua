@@ -19,9 +19,6 @@ module.getInitialSession = function()
             trackAction1 = {},
             trackAction2 = {},
         },
-        Crawl = {
-            on = false,
-        },
     }
     return data
 end

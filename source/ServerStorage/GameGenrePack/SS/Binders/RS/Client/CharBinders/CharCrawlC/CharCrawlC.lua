@@ -1,3 +1,4 @@
+local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
@@ -40,52 +41,63 @@ function CharCrawlC:loadAnimations()
     end
 end
 
-function CharCrawlC:handleCrawl()
-    local function update(state)
-        if state.on then
-            local coreAnimations = Data.Animations.Animations.R15.Crawl
-            local maid = self._maid:Add2(Maid.new(), "CrawlAnimation")
-            local tbl = {
-                {"idle", "Idle", 10},
-                {"walk", "Walk", 10},
-                {"run", "Run", 10},
-            }
-            maid:Add(function()
-                if not self.char.Parent then return end
-                for _, data in ipairs(tbl) do
-                    local coreAnim = data[1]
-                    local poseStyle = "Default"
-                    local weight = data[3]
-                    local CoreAnimationsData = Data.Animations[("CoreAnimations%s"):format("R15")]
-                    self.charCoreAnimations:setPoseAnimations(
-                        coreAnim,
-                        poseStyle,
-                        CoreAnimationsData.defaultCoreAnimations[coreAnim]
-                    )
-                end
-            end)
+function CharCrawlC:setAnimation(state)
+    if state.on then
+        local coreAnimations = Data.Animations.Animations.R15.Crawl
+        local maid = self._maid:Add2(Maid.new(), "CrawlAnimation")
+        local tbl = {
+            {"idle", "Idle", 10},
+            {"walk", "Walk", 10},
+            {"run", "Run", 10},
+        }
+        maid:Add(function()
+            if not self.char.Parent then return end
             for _, data in ipairs(tbl) do
                 local coreAnim = data[1]
-                local animKey = data[2]
-                local poseStyle = coreAnimations[animKey]
+                local poseStyle = "Default"
                 local weight = data[3]
+                local CoreAnimationsData = Data.Animations[("CoreAnimations%s"):format("R15")]
                 self.charCoreAnimations:setPoseAnimations(
                     coreAnim,
                     poseStyle,
-                    {
-                        {
-                            id = coreAnimations[animKey].AnimationId,
-                            weight = weight,
-                        },
-                    }
+                    CoreAnimationsData.defaultCoreAnimations[coreAnim]
                 )
             end
-        else
-            self._maid:Remove("CrawlAnimation")
+        end)
+        for _, data in ipairs(tbl) do
+            local coreAnim = data[1]
+            local animKey = data[2]
+            local poseStyle = coreAnimations[animKey]
+            local weight = data[3]
+            self.charCoreAnimations:setPoseAnimations(
+                coreAnim,
+                poseStyle,
+                {
+                    {
+                        id = coreAnimations[animKey].AnimationId,
+                        weight = weight,
+                    },
+                }
+            )
         end
+    else
+        self._maid:Remove("CrawlAnimation")
     end
-    self._maid:Add(self.charState:getEvent(S.LocalSession, "Crawl", "set"):Connect(update))
-    local state = self.charState:get(S.LocalSession, "Crawl")
+end
+
+function CharCrawlC:setCollision(state)
+    for _, inst in ipairs(CollectionService:GetTagged("CrawlBarrier")) do
+        inst.CanCollide = not state.on
+    end
+end
+
+function CharCrawlC:handleCrawl()
+    local function update(state)
+        self:setAnimation(state)
+        self:setCollision(state)
+    end
+    self._maid:Add(self.charState:getEvent(S.Session, "Crawl", "set"):Connect(update))
+    local state = self.charState:get(S.Session, "Crawl")
     update(state)
 end
 

@@ -24,6 +24,9 @@ module.getInitialSession = function(charState)
         Hide = {
             on = false,
         },
+        Crawl = {
+            on = false,
+        },
     }
 
     return data

@@ -43,8 +43,8 @@ function View:handleButtonColors()
             ButtonRing.ImageColor3 = Color3.fromRGB(0, 0, 0)
         end
     end
-    self._maid:Add(self.charState:getEvent(S.LocalSession, "Crawl", "set"):Connect(update))
-    local state = self.charState:get(S.LocalSession, "Crawl")
+    self._maid:Add(self.charState:getEvent(S.Session, "Crawl", "set"):Connect(update))
+    local state = self.charState:get(S.Session, "Crawl")
     update(state)
 end
 
