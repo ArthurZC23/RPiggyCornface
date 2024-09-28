@@ -152,16 +152,6 @@ function CharCoreAnimationsR15:setPoseAnimations(pose, poseStyle, animationsData
     local poseAnims = self.animationsFolder[pose]
     InstanceUtils.clearChildrenWhichAre(poseAnims, "Animation")
 
-    for _, track in ipairs(self.coreTracks) do
-		track:Stop(0)
-		track:Destroy()
-	end
-
-    -- Need defer else new anim doesn't play
-    task.defer(function()
-        self:playAnimation(self.currentAnimName, 0.1)
-    end)
-
     for i, data in ipairs(animationsData) do
         assert(data.id or data.animation, "Require Animation instance or animationId.")
         local animation
@@ -182,7 +172,12 @@ function CharCoreAnimationsR15:setPoseAnimations(pose, poseStyle, animationsData
             }
         )
         weight.Parent = animation
+
         animation.Parent = poseAnims
+    end
+
+    for _, track in pairs(self.humanoid:GetPlayingAnimationTracks()) do
+        track:Stop(0)
     end
 
     self.poseToAnims[pose] = animationsData
