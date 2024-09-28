@@ -55,10 +55,8 @@ function CharCrawlS:setSpeed(state)
         maid:Add2(function()
             prop:removeCause(property, cause)
         end)
-        print("Set 8")
         prop:set(property, cause, 8)
     else
-        print("Set 16")
         self._maid:Remove("CrawlSpeed")
     end
 end
