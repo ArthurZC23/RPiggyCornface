@@ -23,6 +23,11 @@ local module = {
         Emotes = {
 
         },
+        Crawl = {
+            Idle = Animations.R15.Core["85274154747912"],
+            Walk = Animations.R15.Core["127174811523248"],
+            Run = Animations.R15.Core["125116954502390"],
+        }
     },
     Monster_R6_1 = {
         Emotes = {
