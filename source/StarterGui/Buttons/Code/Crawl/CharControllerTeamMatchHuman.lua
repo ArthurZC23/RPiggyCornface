@@ -20,7 +20,7 @@ local localPlayer = Players.LocalPlayer
 
 local Controller = {}
 Controller.__index = Controller
-Controller.className = "CrawlControllerTeamMatchHuman"
+Controller.className = "CrawlControllerTeamEngine"
 Controller.TAG_NAME = Controller.className
 
 function Controller.new(charTeamGuis)
@@ -39,13 +39,13 @@ function Controller.new(charTeamGuis)
 end
 
 function Controller:toggleCrawl()
-    local crawlState = self.charState:set(S.LocalSession, "Crawl")
+    local crawlState = self.charState:get(S.LocalSession, "Crawl")
     do
         local action = {
             name = "set",
             value = not crawlState.on
         }
-        crawlState:set(S.LocalSession, "Crawl", action)
+        self.charState:set(S.LocalSession, "Crawl", action)
     end
 end
 
